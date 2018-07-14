@@ -996,6 +996,16 @@ s   *
    */
   uint8_t flush_rx(void);
 
+  /**
+   * Alter a register whenever needed. Wrapper of private function write_register.
+   *
+   * @param reg Which register. Use constants from nRF24L01.h
+   * @param value The new value to write
+   *
+   * @return Current value of status register
+   */
+  uint8_t writeRegister(uint8_t reg, uint8_t value);
+
 private:
 
   /**

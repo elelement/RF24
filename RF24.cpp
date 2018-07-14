@@ -328,6 +328,11 @@ uint8_t RF24::flush_tx(void)
   return spiTrans( FLUSH_TX );
 }
 
+uint8_t RF24::writeRegister(uint8_t reg, uint8_t value)
+{
+  return write_register(reg, value);
+}
+
 /****************************************************************************/
 
 uint8_t RF24::spiTrans(uint8_t cmd){
