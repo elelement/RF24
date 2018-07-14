@@ -39,7 +39,7 @@ static int sysFds [64] =
 } ;
 
 // ISR Data
-static void (*isrFunctions [64])(void) ;
+static void (*isrFunctions [64])(void*);
 
 int waitForInterrupt (int pin, int mS)
 {
@@ -96,7 +96,7 @@ void *interruptHandler (void *arg)
   for (;;)
     if (waitForInterrupt (myPin, -1) > 0){
       pthread_mutex_lock (&pinMutex) ;
-      isrFunctions [myPin] () ;
+      isrFunctions [myPin] (arg) ;
       pthread_mutex_unlock (&pinMutex) ;
 	  pthread_testcancel(); //Cancel at this point if we have an cancellation request.
     }
@@ -104,8 +104,7 @@ void *interruptHandler (void *arg)
   return NULL ;
 }
 
-
-int attachInterrupt (int pin, int mode, void (*function)(void))
+int attachInterrupt(int pin, int mode, void(*function)(void*), void* userData)
 {
   const char *modeS ;
   char fName   [64] ;
@@ -165,7 +164,7 @@ int attachInterrupt (int pin, int mode, void (*function)(void))
 
   pthread_mutex_lock (&pinMutex) ;
     pinPass = pin ;
-    pthread_create (&threadId[bcmGpioPin], NULL, interruptHandler, NULL) ;
+    pthread_create (&threadId[bcmGpioPin], NULL, interruptHandler, userData);
     while (pinPass != -1)
       delay (1) ;
   pthread_mutex_unlock (&pinMutex) ;

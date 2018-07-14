@@ -49,9 +49,13 @@ extern int piHiPri (const int pri);
  *      Pi Specific.
  *      Take the details and create an interrupt handler that will do a call-
  *      back to the user supplied function.
+ *      Replaced old signature:
+ *          <code>extern int attachInterrupt (int pin, int mode, void (*function)(void));</code>
+ *      Now we are able to pass user data to the callback function
+ *
  *********************************************************************************
  */
-extern int attachInterrupt (int pin, int mode, void (*function)(void));
+extern int attachInterrupt(int pin, int mode, void(*function)(void*), void* userData);
 
 /*
  * detachInterrupt:
