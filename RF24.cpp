@@ -333,6 +333,11 @@ uint8_t RF24::writeRegister(uint8_t reg, uint8_t value)
   return write_register(reg, value);
 }
 
+uint8_t RF24::writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len)
+{
+  return write_register(reg, buf, len);
+}
+
 /****************************************************************************/
 
 uint8_t RF24::spiTrans(uint8_t cmd){
