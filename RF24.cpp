@@ -68,7 +68,7 @@ void RF24::ce(bool level)
   inline void RF24::beginTransaction() {
     #if defined (RF24_SPI_TRANSACTIONS)
     _SPI.beginTransaction(SPISettings(RF24_SPI_SPEED, MSBFIRST, SPI_MODE0));
-	#endif
+    #endif
     csn(LOW);
   }
 
@@ -326,6 +326,16 @@ uint8_t RF24::flush_rx(void)
 uint8_t RF24::flush_tx(void)
 {
   return spiTrans( FLUSH_TX );
+}
+
+uint8_t RF24::writeRegister(uint8_t reg, uint8_t value)
+{
+  return write_register(reg, value);
+}
+
+uint8_t RF24::writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len)
+{
+  return write_register(reg, buf, len);
 }
 
 /****************************************************************************/
