@@ -1006,17 +1006,6 @@ s   *
    */
   uint8_t writeRegister(uint8_t reg, uint8_t value);
 
-  /**
-   * Alter a register whenever needed. Wrapper of private function write_register.
-   *
-   * @param reg Which register. Use constants from nRF24L01.h
-   * @param buf Where to get the data
-   * @param value The new value to write
-   *
-   * @return Current value of status register
-   */
-  uint8_t writeRegister(uint8_t reg, const uint8_t* buf, uint8_t len);
-
 private:
 
   /**
