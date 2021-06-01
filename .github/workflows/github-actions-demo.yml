@@ -15,5 +15,5 @@ jobs:
         run: |
           ls ${{ github.workspace }} \
           ./configure --prefix=${{ github.workspace }} \
-          make && sudo make install
+          make && make install
       - run: echo "🍏 This job's status is ${{ job.status }}."
